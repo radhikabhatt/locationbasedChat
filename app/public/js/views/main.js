@@ -17,7 +17,6 @@ var ContainerView = Backbone.View.extend({
 var LoginView = Backbone.View.extend({
     template: _.template($('#login-template').html()),
 
-
     events: {
         'click #nameBtn': 'onLogin'
     },
@@ -40,6 +39,13 @@ var LoginView = Backbone.View.extend({
     },
 
     onLogin: function() {
+		if ("geolocation" in navigator) {
+			navigator.geolocation.getCurrentPosition(function(position) {
+			  console.log(position.coords.latitude, position.coords.longitude);
+			});
+		} else {
+		  alert("This App Requires geolocation")
+		}
 	this.l.start();
 	this.vent.trigger("login", this.$('#nameText').val());
     }
@@ -60,7 +66,7 @@ var HomeView = Backbone.View.extend({
 
 	var onlineUsers = this.model.get('onlineUsers');
 	var userChats = this.model.get('userChats');
-	
+
 	this.listenTo(onlineUsers, "add", this.renderUser, this);
 	this.listenTo(onlineUsers, "remove", this.renderUsers, this);
 	this.listenTo(onlineUsers, "reset", this.renderUsers, this);
@@ -73,12 +79,12 @@ var HomeView = Backbone.View.extend({
     render: function() {
 
 	var onlineUsers = this.model.get("onlineUsers");
-	
+
 	this.$el.html(this.template());
 
 	this.renderUsers();
 	this.renderChats();
-	
+
 	return this;
     },
 
@@ -98,7 +104,7 @@ var HomeView = Backbone.View.extend({
 
 	this.$('#userCount').html(this.model.get("onlineUsers").length);
 
-	
+
 	this.$('.nano').nanoScroller();
     },
 
@@ -114,7 +120,7 @@ var HomeView = Backbone.View.extend({
 	var template = _.template("<a class='list-group-item'><span class='text-info'><%= sender %></span>:<%= message %></a>");
 
 	var element = $(template(model.toJSON()));
-	
+
 	element.appendTo(this.$('#chatList')).hide().fadeIn().slideDown();
 
 	this.$('.nano').nanoScroller();
@@ -134,6 +140,6 @@ var HomeView = Backbone.View.extend({
     }
 
 
-    
-    
+
+
 });
