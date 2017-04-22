@@ -1,0 +1,8 @@
+.DS_Store
+.project
+.settings
+.idea
+*.iml
+*.log*
+node_modules
+app/public/bower_components
