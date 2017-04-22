@@ -1,0 +1,19 @@
+{
+  "name": "chat-socketio",
+  "version": "0.0.0-3",
+  "description": "",
+  "dependencies": {
+      "express": "3.0.0",
+      "socket.io": "latest",
+      "underscore": "latest"
+  },
+  "author": "",
+  "license": "BSD",
+  "subdomain": "freechat",
+  "scripts": {
+    "start": "node ./app/scripts/web"
+  },
+  "engines": {
+    "node": "0.10.x"
+  }
+}
