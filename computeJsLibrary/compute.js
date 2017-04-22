@@ -1,4 +1,4 @@
-var LocationBasedChatServerCompute = function() {
+module.exports.LocationBasedChatServerCompute = function() {
     /**
      * Datastructures involved in the API
      *
@@ -37,20 +37,21 @@ var LocationBasedChatServerCompute = function() {
      */
     this.addUserUpdate = function(user_id, user_location, timestamp, range)
     {
-
+        this.locations[user_id].location = user_location;
+        this.locations[user_id].range = range;
     };
 
     /**
      * Sends a message to the compute service
-     * @param {String} user_id The user id
-     * @param {GeoPoint} message_location The location of the message
-     * @param {Long} timestamp Unix timestamp of the message
-     * @param {Long} sequence_number Message sequence number
-     * @param {String} message The message itself
+     * @param {Message} message
      */
-    this.addSingleMessage = function(user_id, message_location, timestamp, sequence_number, message)
+    this.addSingleMessage = function(message)
     {
-
+        this.locations.forEach(function(location_data, user_id) {
+            if (distanceBetweenLocations(message.message_location, location_data.location) <= location_data.range) {
+                this.messageQueues[user_id].push(message);
+            }
+        });
     };
 
 
@@ -61,7 +62,7 @@ var LocationBasedChatServerCompute = function() {
      */
     this.retrieveUserLocation = function(user_id)
     {
-
+        return this.locations[user_id].location;
     };
 
     /**
@@ -71,11 +72,16 @@ var LocationBasedChatServerCompute = function() {
      */
     this.retrieveSingleMessage = function(user_id)
     {
-
+        return this.messageQueues[user_id].push(message).shift();
     };
 
     //Helper functions bellow, not part of the API
 
+    this.locations = {};
+    this.messageQueues = {};
+    distanceBetweenLocations = function(location1, location2) {
+        return distanceInKmBetweenEarthCoordinates(location1.lat, location1.lon, location2.lat, location2.lon);
+    };
     // START credit to StackOverflow users cletus and jameshfisher
     degreesToRadians = function(degrees) {
         return degrees * Math.PI / 180;
@@ -97,3 +103,5 @@ var LocationBasedChatServerCompute = function() {
     };
     // END credit to StackOverflow users cletus and jameshfisher
 };
+
+
