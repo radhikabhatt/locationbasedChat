@@ -39,13 +39,6 @@ var LoginView = Backbone.View.extend({
     },
 
     onLogin: function() {
-		if ("geolocation" in navigator) {
-			navigator.geolocation.getCurrentPosition(function(position) {
-			  console.log(position.coords.latitude, position.coords.longitude);
-			});
-		} else {
-		  alert("This App Requires geolocation")
-		}
 	this.l.start();
 	this.vent.trigger("login", this.$('#nameText').val());
     }
@@ -98,6 +91,14 @@ var HomeView = Backbone.View.extend({
 
 
     renderUser: function(model) {
+	if ("geolocation" in navigator) {
+		var position = navigator.geolocation.getCurrentPosition(_.bind(function(position) {
+			model.attributes.position = [position.coords.latitude, position.coords.longitude];
+			console.log(model);
+		},this));
+	} else {
+	  alert("This App Requires geolocation")
+	}
 	var template = _.template("<a class='list-group-item'><%= name %></a>");
 
 	this.$('#userList').append(template(model.toJSON()));
