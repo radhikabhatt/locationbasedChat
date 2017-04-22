@@ -1,6 +1,6 @@
 {
-  "name": "Location Based Chat",
-  "version": "0.1",
+  "name": "Location-Based-Chat",
+  "version": "0.1.0",
   "description": "",
   "dependencies": {
       "express": "3.0.0",
