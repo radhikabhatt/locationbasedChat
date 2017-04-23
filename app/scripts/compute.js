@@ -39,6 +39,7 @@ module.exports.LocationBasedChatServerCompute = function() {
 
     this.addUserUpdate = function(user_id, user_location, timestamp, range)
     {
+        console.log(range);
         if (this.locations[user_id] == null) {
             this.locations[user_id] = {};
         }
@@ -105,11 +106,6 @@ module.exports.LocationBasedChatServerCompute = function() {
             return;
         }
         self = this;
-
-        // This will be deleted once location is added to the messages.
-        Object.keys(this.callbacks).forEach(function(user_id) {
-            self.callbacks[user_id](message);
-        });
 
         Object.keys(this.locations).forEach(function(user_id) {
             location_data = self.locations[user_id];

@@ -27,8 +27,12 @@ var MainController = function() {
     }
 
     self.viewEventBus.on("login", function(name) {
-	// socketio login
-	self.chatClient.login(name);
+	      // socketio login
+	      self.chatClient.login(name);
+    });
+
+    self.viewEventBus.on("radiusUpdate", function(name) {
+	      self.chatClient.setRadius(name);
     });
 
     self.viewEventBus.on("chat", function(chat) {
