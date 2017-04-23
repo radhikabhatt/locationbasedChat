@@ -19,6 +19,7 @@ var LoginView = Backbone.View.extend({
 
     events: {
         'click #nameBtn': 'onLogin'
+
     },
 
     initialize: function(options) {
@@ -42,6 +43,13 @@ var LoginView = Backbone.View.extend({
 	      this.l.start();
 	      this.vent.trigger("login", this.$('#nameText').val());
 	      this.vent.trigger("radiusUpdate", this.$('#radiusText').val());
+    },
+
+    getScollVal: function() {
+    	var radius = $('#slider-2').val();
+	    this.vent.trigger("radiusUpdate", radius);
+    	
+    	console.log(radius);
     }
 });
 
@@ -50,7 +58,8 @@ var HomeView = Backbone.View.extend({
     template: _.template($("#home-template").html()),
 
     events: {
-	      'keypress #chatInput': 'chatInputPressed'
+	      'keypress #chatInput': 'chatInputPressed',
+	      'click #submit':  'updateRadius'
     },
 
     initialize: function(options) {
@@ -79,6 +88,12 @@ var HomeView = Backbone.View.extend({
 	      this.renderChats();
 
 	      return this;
+    },
+
+    updateRadius: function(){
+        var radius = $('.radius_updated').val();
+        this.vent.trigger("radiusUpdate", radius);
+        console.log(radius);
     },
 
     renderUsers: function() {
