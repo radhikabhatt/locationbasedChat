@@ -39,7 +39,6 @@ module.exports.LocationBasedChatServerCompute = function() {
 
     this.addUserUpdate = function(user_id, user_location, timestamp, range)
     {
-        console.log(range);
         if (this.locations[user_id] == null) {
             this.locations[user_id] = {};
         }
