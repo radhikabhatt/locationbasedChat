@@ -45,7 +45,7 @@
   
   <script type='text/template' id="login-template">
           <div class="row">
-            <div class="col-md-4 col-md-offset-4 text-center">
+            <div class="col-md-4 col-md-offset-4">
               <div>
 		<div class="form-group
 			    <% if (error)  {%>
@@ -53,17 +53,19 @@
 			    <% } %>
 			    ">
 		  
+		<div class='wrapper'>  
 		  <label>Name</label>
 		  <input type="text" class="form-control name" id="nameText">
 		  <label>Radius</label>
 		  <input type="text" class="form-control radius" id="radiusText">
-
+		   <a id="nameBtn" type="button" class="btn btn-primary btn-lg ladda-button" data-size="l" data-style="zoom-out"><span class="ladda-label">Login</span></a>
+        </div>
 
 		  <label class="control-label"> <%= error %> </label>
 
 		  <br>
 
-		  <a id="nameBtn" type="button" class="btn btn-primary btn-lg ladda-button" data-size="l" data-style="zoom-out"><span class="ladda-label">Login</span></a>
+		 
 		</div>
               </div>
             </div>

@@ -54,7 +54,8 @@ body{
 * { box-sizing:border-box; }
 
 
-.container      { 
+.wrapper      { 
+  width: 100%;
   font-family:'Roboto';
   width:600px; 
   margin:30px auto 0; 
@@ -173,8 +174,17 @@ input:focus ~ .highlight {
 .radius, .name{
 	margin-top: 3%;
     width: 300px;
+    text-align: left;
 }
 label{
+	text-align: left !important;
 	margin-top: 10%;
-	float: left;
+	font-size: x-large;
+    font-family: fantasy;
+	/*float: left;*/
+}
+
+#nameBtn{
+	width: 300px;
+	margin-top: 10%;
 }
