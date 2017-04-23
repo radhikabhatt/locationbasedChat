@@ -3,6 +3,11 @@
 <head>
   <meta charset="utf-8">
   <title>Sample Socket.io Chat Application</title>
+  <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+         rel = "stylesheet">
+      <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+      <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
   <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="/bower_components/ladda/dist/ladda-themeless.min.css" rel="stylesheet">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -13,14 +18,30 @@
   
   <link href="/css/main.css" rel="stylesheet">
 
-  
+  <script>
+         $(function() {
+            $( "#slider-2" ).slider({
+               value: 60,
+               animate:"slow",
+               orientation: "horizontal"
+            });
+         });
+      </script>
 </head>
 <body>
-  <nav class="navbar navbar-default"> WhereUChat </nav>
+  <nav class="navbar navbar-default"> 
+  	<img class="img_height" src="https://preview.ibb.co/n5Su6Q/79a4ffee_2779_11e7_8486_6fa619063ddf.png" />
+    <img class="img_height" src="https://preview.ibb.co/jZyTY5/4ef942c6_2780_11e7_8bbb_ffe2f4673726.png" />
+  </nav>
+  
+  <!-- <img src="/assets/79a4ffee-2779-11e7-8486-6fa619063ddf.jpg" > -->
+  <div class='app_name'></div>
+  <!-- <nav class="navbar navbar-default"> WhereUChat </nav> -->
   <div class="container" id="container">
     
   </div>
 
+<!-- <div id = "slider-2"></div> -->
   
   <script type='text/template' id="login-template">
           <div class="row">
@@ -32,12 +53,16 @@
 			    <% } %>
 			    ">
 		  
-		  <input type="text" class="form-control name" id="nameText" placeholder="Enter your name">
-		  <input type="text" class="form-control radius" id="radiusText" placeholder="Enter location radius">
+		  <label>Name</label>
+		  <input type="text" class="form-control name" id="nameText">
+		  <label>Radius</label>
+		  <input type="text" class="form-control radius" id="radiusText">
+
 
 		  <label class="control-label"> <%= error %> </label>
 
 		  <br>
+
 		  <a id="nameBtn" type="button" class="btn btn-primary btn-lg ladda-button" data-size="l" data-style="zoom-out"><span class="ladda-label">Login</span></a>
 		</div>
               </div>
@@ -58,14 +83,7 @@
 	  <div>
 
 	<div class="panel panel-default">
-	  <div class="panel-heading"> Lobby </div>
 	  
-	  <p>
-         <label for = "minval">Minumum value:</label>
-         <input type = "text" id = "minval" 
-            style = "border:0; color:#b9cd6d; font-weight:bold;">
-      </p>
-		
 
 	    <div class="nano">
 	      <div class="content">
@@ -99,7 +117,7 @@
 
   <script src="/socket.io/socket.io.js"></script>
   
-  <script src="/bower_components/jquery/jquery.min.js"></script>
+  <!-- // <script src="/bower_components/jquery/jquery.min.js"></script> -->
   <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
   <!-- Loading Plugin for bootstrap -->

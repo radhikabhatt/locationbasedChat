@@ -110,6 +110,7 @@ var HomeView = Backbone.View.extend({
     },
 
     renderChat: function(model) {
+
         if (model.get("message") != null && model.get("message").message != null) {
             model.set("message",model.get("message").message);
         }

@@ -32,7 +32,7 @@ var HomeModel = Backbone.Model.extend({
     defaults: {
 	onlineUsers: new UserCollection(),
 	userChats: new ChatCollection([
-	    new ChatModel({ sender: '', message: 'Chat Server v.1' })
+	    new ChatModel({ sender: '', message: 'Welcome to your chat room' })
 	])
     },
 
