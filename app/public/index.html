@@ -60,10 +60,10 @@
 	  
 	  <input id="ex6" type="text" data-slider-min="-5" data-slider-max="20" data-slider-step="1" data-slider-value="3"/>
 	  <span id="ex6CurrentSliderValLabel">Current Slider Value: <span id="ex6SliderVal">3</span></span>
-	  // With JQuery
-		$("#ex6").slider();
-		$("#ex6").on("slide", function(slideEvt) {
-			$("#ex6SliderVal").text(slideEvt.value);
+		// Without JQuery
+		var slider = new Slider("#ex6");
+		slider.on("slide", function(sliderValue) {
+			document.getElementById("ex6SliderVal").textContent = sliderValue;
 		});
 
 // 	  <div class="panel-body">
