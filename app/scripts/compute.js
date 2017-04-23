@@ -80,11 +80,24 @@ module.exports.LocationBasedChatServerCompute = function() {
         return this.outputMessageQueues[user_id].shift();
     };
 
+    this.addMessageCallback = function(user_id, callback)
+    {
+        this.callbacks[user_id] = callback;
+    };
+
+    this.userDisconnect = function(user_id)
+    {
+        delete this.callbacks[user_id];
+        delete this.locations[user_id];
+        //delete this.ouputMessageQueues[user_id]; //Set up a periodic 'garbage collector' better
+    };
+
     //Helper functions bellow, not part of the API
 
     this.locations = {};
     this.outputMessageQueues = {};
     this.inputMessageQueue = [];
+    this.callbacks = {};
 
     this.doCompute = function() {
         message = this.inputMessageQueue.shift();
@@ -92,19 +105,29 @@ module.exports.LocationBasedChatServerCompute = function() {
             return;
         }
         self = this;
+
+        // This will be deleted once location is added to the messages.
+        Object.keys(this.callbacks).forEach(function(user_id) {
+            self.callbacks[user_id](message);
+        });
+
         Object.keys(this.locations).forEach(function(user_id) {
             location_data = self.locations[user_id];
             if (distanceBetweenLocations(message.message_location, location_data.location) <= location_data.range) {
-                if ( self.outputMessageQueues[user_id] == null) {
-                    self.outputMessageQueues[user_id] = [];
+                //if ( self.outputMessageQueues[user_id] == null) {
+                //    self.outputMessageQueues[user_id] = [];
+                //}
+                //self.outputMessageQueues[user_id].push(message);
+                if ( self.callbacks[user_id] != null) {
+                    self.callbacks[user_id](message);
                 }
-                self.outputMessageQueues[user_id].push(message);
             }
         });
     };
 
     distanceBetweenLocations = function(location1, location2) {
-        return distanceInKmBetweenEarthCoordinates(location1.lat, location1.lon, location2.lat, location2.lon);
+        distance =  distanceInKmBetweenEarthCoordinates(location1.lat, location1.lon, location2.lat, location2.lon);
+        return distance;
     };
 
     // START credit to StackOverflow users cletus and jameshfisher
