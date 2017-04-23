@@ -72,12 +72,13 @@ var Server = function(options) {
 
 	      user.socket.on("chat", function(chat) {
 	          if (chat) {
+                chat.user_id = user.user;
                 compute.addSingleMessage(chat);
 	          }
 	      });
 
         user.socket.on("update", function(update) {
-            compute.addUserUpdate(user.user, update.location, update.timestamp, update.distance);
+            compute.addUserUpdate(user.user, update.user_location, update.timestamp, update.range);
         });
     };
 };
