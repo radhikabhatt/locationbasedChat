@@ -49,7 +49,12 @@
 	  <div class="panel-heading"> Lobby </div>
 	  
 	  <input id="ex6" type="text" data-slider-min="-5" data-slider-max="20" data-slider-step="1" data-slider-value="3"/>
-	  <span id="ex6CurrentSliderValLabel">Current Slider Value: <span id="ex6SliderVal">3</span></span>	
+	  <span id="ex6CurrentSliderValLabel">Current Slider Value: <span id="ex6SliderVal">3</span></span>
+	  // With JQuery
+		$("#ex6").slider();
+		$("#ex6").on("slide", function(slideEvt) {
+			$("#ex6SliderVal").text(slideEvt.value);
+		});
 
 	  <div class="panel-body">
 	    <div class="nano">
