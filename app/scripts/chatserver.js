@@ -51,7 +51,7 @@ var Server = function(options) {
     self.setResponseListeners = function(user) {
 
         compute.addMessageCallback(user.user, function(message) {
-		        self.io.sockets.emit("chat", { sender: user.user, message: message });
+		        user.socket.emit("chat", { sender: message.user_id, message: message });
         });
 
 	      user.socket.on('disconnect', function() {
