@@ -94,7 +94,6 @@ module.exports.LocationBasedChatServerCompute = function() {
         self = this;
         Object.keys(this.locations).forEach(function(user_id) {
             location_data = self.locations[user_id];
-            console.log(distanceBetweenLocations(message.message_location, location_data.location));
             if (distanceBetweenLocations(message.message_location, location_data.location) <= location_data.range) {
                 if ( self.outputMessageQueues[user_id] == null) {
                     self.outputMessageQueues[user_id] = [];
