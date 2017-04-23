@@ -17,6 +17,7 @@ body{
     background-size: cover;
 	
 }
+
 .img_height{
 	height: 40px;
 }
@@ -62,6 +63,11 @@ body{
   display:block; 
   
   padding:10px 50px 50px;
+  background-color: rgba(255, 255, 255, 0.7);
+  width: 90%;
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 5px;
 }
 h2       { 
   /*text-align:center; */
@@ -187,4 +193,26 @@ label{
 #nameBtn{
 	width: 300px;
 	margin-top: 10%;
+	width: 300px;
+    margin-top: 10%;
+    border-radius: 80px;
+}
+.updated_radius{
+	margin-top: 0px;
+}
+#radiusText{
+	width: 30%;
+	display: inline;
+	margin-bottom: 10px;
+	margin-top: 7px;
+	width: 15%;
+}
+#submit{
+	background-color: #2f00ff;
+}
+.wrapper label{
+	color: #246ba5;
+}
+#nameText{
+	border-bottom: solid 3px #428BCA;
 }

@@ -40,8 +40,6 @@
   <div class="container" id="container">
     
   </div>
-
-  <div id = "slider-2"></div>
   
   <script type='text/template' id="login-template">
           <div class="row">
@@ -56,8 +54,7 @@
 		<div class='wrapper'>  
 		  <label>Name</label>
 		  <input type="text" class="form-control name" id="nameText">
-		  <label>Radius</label>
-		  <input type="text" class="form-control radius" id="radiusText">
+		 
 		   <a id="nameBtn" type="button" class="btn btn-primary btn-lg ladda-button" data-size="l" data-style="zoom-out"><span class="ladda-label">Login</span></a>
         </div>
 
@@ -79,21 +76,17 @@
 
     <div class="row">
       <div class="col-md-10">
-      <label>Radius</label>
+      
 	  <input type="text" class="form-control radius_updated" id="radiusText">
-      <button id="submit"></button>
-	  
-	  <div>
+      <button id="submit" class='btn btn-success'>Update Radius</button>
+
 
 	<div class="panel panel-default">
-	  
-
 	    <div class="nano">
 	      <div class="content">
-
-		<div class="list-group" id="chatList"></div>
+		  <div class="list-group" id="chatList"></div>
 		</div>
-	    </div>
+	 </div>
 
 	    <form>
 	      <input class="form-control" type="text" id="chatInput"></input>
@@ -103,7 +96,7 @@
       </div>
 
       <div class="col-md-2">
-	<div class="panel panel-default">
+	  <div class="panel panel-default">
 	  <div class="panel-heading">
 	    <h3 class="panel-title">Online Users <span class="badge pull-right" id="userCount"></span></h3>
 	  </div>
