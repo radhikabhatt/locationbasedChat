@@ -35,8 +35,13 @@ module.exports.LocationBasedChatServerCompute = function() {
      * @param {Long} timestamp Unix timestamp of the update
      * @param {Float} range Desired range for receiving messages in Kms
      */
+    self = this;
+
     this.addUserUpdate = function(user_id, user_location, timestamp, range)
     {
+        if (this.locations[user_id] == null) {
+            this.locations[user_id] = {};
+        }
         this.locations[user_id].location = user_location;
         this.locations[user_id].range = range;
     };
@@ -47,11 +52,8 @@ module.exports.LocationBasedChatServerCompute = function() {
      */
     this.addSingleMessage = function(message)
     {
-        this.locations.forEach(function(location_data, user_id) {
-            if (distanceBetweenLocations(message.message_location, location_data.location) <= location_data.range) {
-                this.messageQueues[user_id].push(message);
-            }
-        });
+        this.inputMessageQueue.push(message);
+        this.doCompute();
     };
 
 
@@ -68,20 +70,44 @@ module.exports.LocationBasedChatServerCompute = function() {
     /**
      * Gets the first message in queue for a given user
      * @param {String} user_id The user id
-     * @return {Message} The first message in queue for the user
+     * @return {Message} The first message in queue for the user, null if there is no message for this user
      */
     this.retrieveSingleMessage = function(user_id)
     {
-        return this.messageQueues[user_id].push(message).shift();
+        if (this.outputMessageQueues[user_id] == null) {
+            return null;
+        }
+        return this.outputMessageQueues[user_id].shift();
     };
 
     //Helper functions bellow, not part of the API
 
     this.locations = {};
-    this.messageQueues = {};
+    this.outputMessageQueues = {};
+    this.inputMessageQueue = [];
+
+    this.doCompute = function() {
+        message = this.inputMessageQueue.shift();
+        if (message == null) {
+            return;
+        }
+        self = this;
+        Object.keys(this.locations).forEach(function(user_id) {
+            location_data = self.locations[user_id];
+            console.log(distanceBetweenLocations(message.message_location, location_data.location));
+            if (distanceBetweenLocations(message.message_location, location_data.location) <= location_data.range) {
+                if ( self.outputMessageQueues[user_id] == null) {
+                    self.outputMessageQueues[user_id] = [];
+                }
+                self.outputMessageQueues[user_id].push(message);
+            }
+        });
+    };
+
     distanceBetweenLocations = function(location1, location2) {
         return distanceInKmBetweenEarthCoordinates(location1.lat, location1.lon, location2.lat, location2.lon);
     };
+
     // START credit to StackOverflow users cletus and jameshfisher
     degreesToRadians = function(degrees) {
         return degrees * Math.PI / 180;
