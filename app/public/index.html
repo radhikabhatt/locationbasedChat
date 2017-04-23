@@ -13,7 +13,7 @@
   
 </head>
 <body>
-
+  <nav class="navbar navbar-default"> WhereUChat </nav>
   <div class="container" id="container">
     
   </div>
@@ -22,14 +22,15 @@
   <script type='text/template' id="login-template">
           <div class="row">
             <div class="col-md-4 col-md-offset-4 text-center">
-              <div class="well">
+              <div>
 		<div class="form-group
 			    <% if (error)  {%>
 			    has-error
 			    <% } %>
 			    ">
-		  <label> Name </label>
-		  <input type="text" class="form-control" id="nameText" placeholder="Enter your name">
+		  
+		  <input type="text" class="form-control name" id="nameText" placeholder="Enter your name">
+		  <input type="text" class="form-control radius" id="nameText" placeholder="Enter location radius">
 
 		  <label class="control-label"> <%= error %> </label>
 
@@ -43,12 +44,15 @@
 
 
   <script type='text/template' id="home-template">
+    
+
+
     <div class="row">
       <div class="col-md-10">
-	<div class="panel panel-default">
-	  <div class="panel-heading"> Lobby </div>
-	  <input id="ex8" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="13000" data-slider-step="1" data-slider-value="14"/>
-	  <div class="panel-body">
+
+	  
+	  <div>
+
 	    <div class="nano">
 	      <div class="content">
 		<div class="list-group" id="chatList"></div>
@@ -59,7 +63,7 @@
 	      <input class="form-control" type="text" id="chatInput"></input>
 	    </form>
 	  </div>
-	</div>
+	
       </div>
       <div class="col-md-2">
 	<div class="panel panel-default">
